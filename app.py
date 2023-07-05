@@ -15,7 +15,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-class Area(db.Model):
+class Shop(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     shopname = db.Column(db.String(100), nullable=False)
     areaname = db.Column(db.String(100), nullable=False)
@@ -25,12 +25,13 @@ class Area(db.Model):
                            server_default=func.now())
     desc = db.Column(db.Text)
 
-
+     def __repr__(self):
+            return f'<Shop {self.shopname}>'
 
 #displaying shops
 @app.route('/')
 def index():
-    areas = Area.query.all()
+    areas = Shop.query.all()
     return render_template('index.html', areas=areas)
 
 
@@ -44,12 +45,12 @@ def create():
             city = request.form['city']
             areacode = request.form['areacode']
             desc = request.form['desc']
-            area = Area(shopname=shopname,
+            shop = Shop(shopname=shopname,
                               areaname=areaname,
                               city=city,
                               areacode=areacode,
                               desc=desc)
-            db.session.add(area)
+            db.session.add(shop)
             db.session.commit()
     
             return redirect(url_for('index'))
