@@ -2,6 +2,7 @@ export FLASK_APP=app
 flask shell
 
 from app import db, Area
+
 student_john = Student(shopname='Fife Street', areaname='BYO CBD',
                        city='Bulawayo', areacode=029,
                        desc='Bulawayo main shop')
