@@ -17,6 +17,7 @@ db = SQLAlchemy(app)
 
 class Area(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    shopname = db.Column(db.String(100), nullable=False)
     areaname = db.Column(db.String(100), nullable=False)
     city = db.Column(db.String(100), nullable=False)
     areacode = db.Column(db.String(80), unique=True, nullable=False)
@@ -24,5 +25,19 @@ class Area(db.Model):
                            server_default=func.now())
     desc = db.Column(db.Text)
 
-    def __repr__(self):
-        return f'<Area {self.areaname}>'
+
+
+#displaying shops
+@app.route('/')
+def index():
+    areas = Area.query.all()
+    return render_template('index.html', areas=areas)
+
+
+#inputing shops    
+@app.route('/create/', methods=('GET', 'POST'))
+def create():
+    return render_template('create.html')
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=105)
