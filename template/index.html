@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="title">{% block title %} Areas {% endblock %}</h1>
+    <div class="content">
+        {% for area in areas %}
+            
+            <div class="area">
+                <p><b>#{{ area.id }}</b></p>
+                <b>
+                    <p class="name">{{ area.shopname }} {{ area.areacity }}</p>
+                </b>
+                
+
+                <div class="desc">
+                    <h4>Description</h4>
+                    <p>{{ area.desc }}</p>
+                </div>
+                
+                </b>
+
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
