@@ -37,6 +37,23 @@ def index():
 #inputing shops    
 @app.route('/create/', methods=('GET', 'POST'))
 def create():
+    def create():
+        if request.method == 'POST':
+            shopname = request.form['shopname']
+            areaname = request.form['areaname']
+            city = request.form['city']
+            areacode = request.form['areacode']
+            desc = request.form['desc']
+            area = Area(shopname=shopname,
+                              areaname=areaname,
+                              city=city,
+                              areacode=areacode,
+                              desc=desc)
+            db.session.add(area)
+            db.session.commit()
+    
+            return redirect(url_for('index'))
+
     return render_template('create.html')
 
 if __name__ == '__main__':
