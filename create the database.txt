@@ -1,0 +1,6 @@
+export FLASK_APP=app
+flask shell
+
+from app import db, Area
+
+db.create_all()
